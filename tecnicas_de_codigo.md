@@ -66,18 +66,6 @@ Cria uma anotação para validações, como por exemplo o **@NotBlanck**.
 
 Como criar:
 
-1. Item 1
-2. Item 2
-3. Item 3
-   4. Item 3a
-   5. Item 3b
-
-1. Item 1
-1. Item 2
-1. Item 3
-   1. Item 3a
-   1. Item 3b
-
 1. Definir a anotação com uma **@interface** (note que utiliza uma @ e não apenas interface);
    1. É necessário os seguintes atributos:
       1. **message** com a mensagem padrão do erro;
@@ -109,11 +97,11 @@ public @interface ExistId {
 }
 ```
 
-2. Definir o validador;
-   2. A classe deve implementar a interface **ConstraintValidator** com dois parâmetros, a anotação criada e o tipo que o validador lida, ex. String;
-   2. Deve implementar os dois métodos da interface:
-   2. **inicialize** que fornece acesso aos valores de atributo da restrição, permitindo armazena-los em um campo do validador;
-   2. **isValid** contém a lógica do validador.
+1. Definir o validador;
+   1. A classe deve implementar a interface **ConstraintValidator** com dois parâmetros, a anotação criada e o tipo que o validador lida, ex. String;
+   1. Deve implementar os dois métodos da interface:
+   1. **inicialize** que fornece acesso aos valores de atributo da restrição, permitindo armazena-los em um campo do validador;
+   1. **isValid** contém a lógica do validador.
 
 ```java
 /*
@@ -169,6 +157,13 @@ Anotação | Se for nulo | Se estiver vazio | Se estiver vazio depois de aparado
 **@NotNull** | x | | 
 **@NotEmpty** | x | x |
 **@NotBlanck** | x | x | x
+
+
+First Header | Second Header
+------------ | -------------
+Content from cell 1 | Content from cell 2
+Content in the first column | Content in the second column
+
 
 Nulo: Quando o objeto = null.
 
