@@ -1,4 +1,4 @@
-# Entendido sobre o CDD
+# Entendimento sobre o CDD
 
 CDD - Cognitive-Driven Development (Desenvolvimento Orientado a Cognição) é uma metodologia para desenvolver código-fonte em que o desenvolvedor está preocupado em ter um controle de carga cognitiva em seu código.
 
@@ -17,8 +17,7 @@ Códigos a tecnologias tranversais, como uso de frameworks e bibliotacas, não c
 
 Exemplo de contagem:
 
-'''java
-
+```java
 public class CompraRequest {
 
     //Dados do comprador
@@ -62,8 +61,7 @@ public class CompraRequest {
         return compra;
     }
 }
-
-'''
+```
 
 No código acima, a classe *CompraRequest* contém 9 pontos de carga intrínseca (PCI).
 
