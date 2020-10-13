@@ -76,6 +76,11 @@ Como criar:
       1. **@Retention(RUNTIME)** especifica que a nova anotação estará disponível em tempo de execução;
       1. **@Documented** informa que a nova anotação estará contida no JavaDoc;
       1. **@Constraint(validatedBy = [..])** indica qual o validador será utilizado para validar os elementos anotados.
+1. Definir o validador;
+   1. A classe deve implementar a interface **ConstraintValidator** com dois parâmetros, a anotação criada e o tipo que o validador lida, ex. String;
+   1. Deve implementar os dois métodos da interface:
+      1. **inicialize** que fornece acesso aos valores de atributo da restrição, permitindo armazena-los em um campo do validador;
+      1. **isValid** contém a lógica do validador.
 
 ```java
 /*
@@ -95,15 +100,7 @@ public @interface ExistId {
     String nomeCampo();         // Será passado na anotação o atribudo nomeCampo com o nome do campo que será validado 
     Class<?> dominioClasse();   // Será passado na anotação o atributo dominioClasse com o domínio da Classe da entidade 
 }
-```
 
-1. Definir o validador;
-   1. A classe deve implementar a interface **ConstraintValidator** com dois parâmetros, a anotação criada e o tipo que o validador lida, ex. String;
-   1. Deve implementar os dois métodos da interface:
-   1. **inicialize** que fornece acesso aos valores de atributo da restrição, permitindo armazena-los em um campo do validador;
-   1. **isValid** contém a lógica do validador.
-
-```java
 /*
  * Validação da anotação ExistId.
 */
@@ -153,17 +150,10 @@ No exemplo acima, é considerado um erro, que executa uma exceção, se na lista
 # Diferença entre @NotNull, @NotEmpty e @NotBlanck
 
 Anotação | Se for nulo | Se estiver vazio | Se estiver vazio depois de aparado
------------- | -------------
+-------- | ------------|------------------|-----------------------------------
 **@NotNull** | x | | 
 **@NotEmpty** | x | x |
 **@NotBlanck** | x | x | x
-
-
-First Header | Second Header
------------- | -------------
-Content from cell 1 | Content from cell 2
-Content in the first column | Content in the second column
-
 
 Nulo: Quando o objeto = null.
 
