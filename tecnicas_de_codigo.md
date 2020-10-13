@@ -79,15 +79,15 @@ Como criar:
    1. Item 3b
 
 1. Definir a anotação com uma **@interface** (note que utiliza uma @ e não apenas interface);
-  1.1. É necessário os seguintes atributos:
-    1.1.1. **message** com a mensagem padrão do erro;
-    1.1.2. **groups** que permite especificar grupos de validação. Por *default* é um *array* vazio do tipo *Class<?>*;
-    1.1.3. **playload** que pode ser utilizado por clientes da **API Jakarta Bean Validation** para personalizar **playload** de uma restrição. Ela não é usada pela própria API;
-1.2. É utilizado as seguintes anotações:
-  1.2.1. **@Target** é informado o alvo da anotação, por exemplo, **Field** (campo);
-  1.2.2. **@Retention(RUNTIME)** especifica que a nova anotação estará disponível em tempo de execução;
-  1.2.3. **@Documented** informa que a nova anotação estará contida no JavaDoc;
-  1.2.4. **@Constraint(validatedBy = [..])** indica qual o validador será utilizado para validar os elementos anotados.
+   1. É necessário os seguintes atributos:
+      1. **message** com a mensagem padrão do erro;
+      1. **groups** que permite especificar grupos de validação. Por *default* é um *array* vazio do tipo *Class<?>*;
+      1. **playload** que pode ser utilizado por clientes da **API Jakarta Bean Validation** para personalizar **playload** de uma restrição. Ela não é usada pela própria API;
+   1. É utilizado as seguintes anotações:
+      1. **@Target** é informado o alvo da anotação, por exemplo, **Field** (campo);
+      1. **@Retention(RUNTIME)** especifica que a nova anotação estará disponível em tempo de execução;
+      1. **@Documented** informa que a nova anotação estará contida no JavaDoc;
+      1. **@Constraint(validatedBy = [..])** indica qual o validador será utilizado para validar os elementos anotados.
 
 ```java
 /*
@@ -110,10 +110,10 @@ public @interface ExistId {
 ```
 
 2. Definir o validador;
-  2.1. A classe deve implementar a interface **ConstraintValidator** com dois parâmetros, a anotação criada e o tipo que o validador lida, ex. String;
-  2.2. Deve implementar os dois métodos da interface:
-  2.2.1. **inicialize** que fornece acesso aos valores de atributo da restrição, permitindo armazena-los em um campo do validador;
-  2.2.2. **isValid** contém a lógica do validador.
+   2. A classe deve implementar a interface **ConstraintValidator** com dois parâmetros, a anotação criada e o tipo que o validador lida, ex. String;
+   2. Deve implementar os dois métodos da interface:
+   2. **inicialize** que fornece acesso aos valores de atributo da restrição, permitindo armazena-los em um campo do validador;
+   2. **isValid** contém a lógica do validador.
 
 ```java
 /*
@@ -171,5 +171,7 @@ Anotação | Se for nulo | Se estiver vazio | Se estiver vazio depois de aparado
 **@NotBlanck** | x | x | x
 
 Nulo: Quando o objeto = null.
+
 Vazio: Quando tamanho/comprimento do objeto = 0, i.e.: String "", Array [], Map {}, Char ''.
+
 Aparado: Rempove espaços da String, i.e.: de "   " fica "".
