@@ -35,7 +35,7 @@ public class CompraRequest {
 
     //Dados da compra
     @Valid
-    private PedidoCompraRequest pedido; //1 - Classe criada no sistema
+    private PedidoCompraRequest pedido; //1 - Classe PedidoCompraRequest criada no sistema
     
     //1 - Classe Compra criada no sistema
     public Compra toModel(EntityManager manager){
