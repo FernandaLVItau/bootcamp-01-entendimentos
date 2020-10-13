@@ -66,6 +66,18 @@ Cria uma anotação para validações, como por exemplo o **@NotBlanck**.
 
 Como criar:
 
+1. Item 1
+2. Item 2
+3. Item 3
+   4. Item 3a
+   5. Item 3b
+
+1. Item 1
+1. Item 2
+1. Item 3
+   1. Item 3a
+   1. Item 3b
+
 1. Definir a anotação com uma **@interface** (note que utiliza uma @ e não apenas interface);
   1.1. É necessário os seguintes atributos:
     1.1.1. **message** com a mensagem padrão do erro;
