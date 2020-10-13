@@ -16,9 +16,9 @@ A classe é capaz de:
 
 Anotação para realiza transação.
 
-* Inicia a transação, finaliza a transação, trata erros, faz callback.
+* Inicia a transação; finaliza a transação; trata erros; faz callback.
 
-*Quando usa EntityManage precisa utilizar esta anotação, mas se usar Repository, o repository já tem os tratamentos de transação e não precisa da anotação*
+*Quando usa EntityManage precisa utilizar esta anotação, mas se usar Repository, o repository já tem os tratamentos de transação e não precisa da anotação.*
 
 ## @PersistenceContext
 
@@ -28,7 +28,7 @@ Lida com um conjunto de entidades que contêm dados a serem persistidos em, por 
 
 ## @RestController
 
-Marca  qye a classe é um controlador (controller) o qual cada método retorna um objeto de domínio em vez de uma visualização (view).
+Marca  que a classe é um controlador (controller) o qual cada método retorna um objeto de domínio em vez de uma visualização (view).
 
 Esta anotação é um 'atalho' do uso das anotações:
 
@@ -88,7 +88,7 @@ Como criar:
       1. **@Target** é informado o alvo da anotação, por exemplo, **Field** (campo);
       1. **@Retention(RUNTIME)** especifica que a nova anotação estará disponível em tempo de execução;
       1. **@Documented** informa que a nova anotação estará contida no JavaDoc;
-      1. **@Constraint(validatedBy = [..])** indica qual o validador será utilizado para validar os elementos anotados.
+      1. **@Constraint(validatedBy = {..})** indica qual o validador será utilizado para validar os elementos anotados.
 1. Definir o validador;
    1. A classe deve implementar a interface **ConstraintValidator** com dois parâmetros, a anotação criada e o tipo que o validador lida, ex. String;
    1. Deve implementar os dois métodos da interface:
@@ -99,7 +99,6 @@ Como criar:
 /*
  * Anotação para validar se o id de um registro existe na base de dados.
 */
-
 @Target(FIELD)
 @Retention(RUNTIME)
 @Documented
@@ -145,7 +144,7 @@ public class ExistIdValidator implements ConstraintValidator<ExistId, Long> {
 }
 ```
 
-Exemplo de uso da anotação acriada acima:
+Exemplo de uso da anotação criada acima:
 ```java
 @ExistId(dominioClasse = Pais.class, nomeCampo = "id")
 private Long idPais;
@@ -153,12 +152,14 @@ private Long idPais;
 
 ## Assert
 Utilizado normalmente em testes, mas pode ser utilizado para validar status ao invés de utilizar *if*.
+
 Se a condição falhar, é executado uma exceção com a mensagem definida.
+
 Exemplo:
 ```java
 Assert.state(list.size() <=1, "Foi encontrado mais de um registro");
 ```
-No exemplo acima, é considerado um erro, que executa uma exceção, se na lista for tiver mais de um registro.
+No exemplo acima, é considerado um erro que executa uma exceção, se na lista tiver mais de um registro.
 
 ## Diferença entre @NotNull, @NotEmpty e @NotBlanck
 
@@ -172,17 +173,17 @@ Nulo: Quando o objeto = null.
 
 Vazio: Quando tamanho/comprimento do objeto = 0, i.e.: String "", Array [], Map {}, Char ''.
 
-Aparado: Rempove espaços da String, i.e.: de "   " fica "".
+Aparado: Rempove espaços da String, i.e.: de " teste " fica "teste".
 
 ## BigDecimal
 
-É mais preciso que o **double**, portanto mais recomendado para trabalhar com valores monetários.
+As casas decimais são mais precisos que o **double**, portanto mais recomendado para trabalhar com valores monetários.
 
 A desvantagem é no uso para operações.
 
 ## .stream()
 
-Converte a **List** para uma interface do tipo **Stream** e dela podemos realizar operações **Filter**, **Map**, **Reduce**.
+Converte **List** para uma interface do tipo **Stream** e dela podemos realizar operações **Filter**, **Map** e **Reduce**.
 
 Esta interface permite chamar um método depois do outro, ou seja, de forma encadeara.
 
@@ -194,21 +195,18 @@ lista.stream().filter(...).mapToInt(...).sum()
 
 ## Lambda e método por referência
 
-Para o exemplo, um código que pela uma lista de objeto Livro e converte para uma lista de objetos Livro2. Sendo que Livro2 tem um construtor que recebe o objeto Livro como parâmetro.
+Considere o exemplo em que há uma lista de objeto `Livro1` que será convertida para uma lista de objetos `Livro2`. A classe `Livro2` tem um construtor que recebe um objeto `Livro1` como parâmetro.
 
 -> Código 1 - Utlizando laço *for*
 ```java
 for(Livro l : listaLivro) {
   lista2Livro[] = new Livro2(l);
-  });
 }
 ```
 
 -> Código 2 - Utilizando Lambda
 ```java
-lista2Livro = listaLivro.stream().map(l -> {
-    return new Livro2(l);
-});
+lista2Livro = listaLivro.stream().map(l -> { return new Livro2(l); });
 ```
 
 -> Cósigo 3 - Utilizando método por referência
@@ -216,6 +214,6 @@ lista2Livro = listaLivro.stream().map(l -> {
 lista2Livro = listaLivro.stream().map(Livro2::new);
 ```
 
-Lambda é ima função anônima.
+Lambda é uma função anônima.
 
-Uma referência pode substitur uma expressão lambda, os arqumentos são obtidos por inferência.
+Uma expressão lambda pode substitur uma referência, o arqumento é obtido por inferência.
