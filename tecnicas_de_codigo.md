@@ -1,8 +1,11 @@
 # Anotações de códigos - JAVA
 
 ## EntityManager
+
 Classe responsável por gerenciar o ciclo de vida das entidades.
+
 A classe é capaz de:
+
 - Localizar entidades;
 - Executar JPQL ou SQL nativo;
 - Persistir entidades;
@@ -10,31 +13,44 @@ A classe é capaz de:
 - Remover entidades.
 
 ## @Transactional
+
 Anotação para realiza transação.
+
 * Inicia a transação, finaliza a transação, trata erros, faz callback.
+
 *Quando usa EntityManage precisa utilizar esta anotação, mas se usar Repository, o repository já tem os tratamentos de transação e não precisa da anotação*
 
 ## @PersistenceContext
+
 Uma instancia **EntityManager** está associado a um contexto de persistencia
+
 Lida com um conjunto de entidades que contêm dados a serem persistidos em, por exemplo, um banco de dados. O Contexto está ciente dos diferentes estados que uma entidade pode ter em relação ao contexto e armazernamento (ex. BD).
 
 ## @RestController
+
 Marca  qye a classe é um controlador (controller) o qual cada método retorna um objeto de domínio em vez de uma visualização (view).
+
 Esta anotação é um 'atalho' do uso das anotações:
+
 - **@Controller**: Indica um tipo específico de compomente, o qual permite que a classe seja detectada automaticamente;
 - **@ResponseBody**: Indica que o(s) método(s) retorna(m) um valor associado ao corpo de uma resposta da web.
 
 ## Serialização e desserialização
+
 Serialização: Converter de outro formato, ex. texto JSON, para objeto;
+
 Desserialização: Converter de objeto para outro formato necessário, ex. texto JSON;
 
 O Spring precisa que as entidades contenham os setters e getters e/ou construtores para realizar as conversões automaticamente, por exemplo, para o controller retornar um objeto, que é uma entidade, e exibir na api o objeto em formato JSON, a entidade precisa ter os métodos getters.
 
 ## @InitBinder
+
 Funciona como um pré-processador para cada requisição feita para o controller.
 
 ## WebDataBinder
+
 Um tipo específico para requisição web de DataBinder, que permite definir propriedades para serem pré-processados na requisição.
+
 Exemplo de uso para adicionar validação em uma requisicção:
 
 ```java
@@ -45,7 +61,9 @@ public void init(WebDataBinder binder) {
 ```
 
 ## Anotação Bean Validation
+
 Cria uma anotação para validações, como por exemplo o **@NotBlanck**.
+
 Como criar:
 
 1. Definir a anotação com uma **@interface** (note que utiliza uma @ e não apenas interface);
@@ -117,6 +135,12 @@ public class ExistIdValidator implements ConstraintValidator<ExistId, Long> {
 }
 ```
 
+Exemplo de uso da anotação acriada acima:
+```java
+@ExistId(dominioClasse = Pais.class, nomeCampo = "id")
+private Long idPais;
+```
+
 ## Assert
 Utilizado normalmente em testes, mas pode ser utilizado para validar status ao invés de utilizar *if*.
 Se a condição falhar, é executado uma exceção com a mensagem definida.
@@ -128,8 +152,7 @@ No exemplo acima, é considerado um erro, que executa uma exceção, se na lista
 
 # Diferença entre @NotNull, @NotEmpty e @NotBlanck
 
-Anotação | Dá erro na validação se
- | for nulo | estiver vazio | se estiver vazio depois de aparado
+Anotação | Se for nulo | Se estiver vazio | Se estiver vazio depois de aparado
 ------------ | -------------
 **@NotNull** | x | | 
 **@NotEmpty** | x | x |
