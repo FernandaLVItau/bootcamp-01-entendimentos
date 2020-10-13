@@ -43,6 +43,10 @@ Desserialização: Converter de objeto para outro formato necessário, ex. texto
 
 O Spring precisa que as entidades contenham os setters e getters e/ou construtores para realizar as conversões automaticamente, por exemplo, para o controller retornar um objeto, que é uma entidade, e exibir na api o objeto em formato JSON, a entidade precisa ter os métodos getters.
 
+## @Autowired
+
+Marca um construtor, campo, método setter ou método de configuração para ser autocarregado pelos recursos de injeção de dependência do Spring.
+
 ## @InitBinder
 
 Funciona como um pré-processador para cada requisição feita para o controller.
@@ -51,14 +55,23 @@ Funciona como um pré-processador para cada requisição feita para o controller
 
 Um tipo específico para requisição web de DataBinder, que permite definir propriedades para serem pré-processados na requisição.
 
-Exemplo de uso para adicionar validação em uma requisicção:
+Por exemplo, adicinar para realizar algumas validações antes de processar a requisição.
+
+## Adicionar validação no InitBinder
 
 ```java
+@Autowired
+Validador1 validador1;
+
 @InitiBinder
 public void init(WebDataBinder binder) {
-  binder.addValidators(new compraValidador());
+  binder.addValidators(validado1, new validador2());
 }
 ```
+
+Ambas as formas podem ser passadas como parâmetro para `addValidators`. Se a classe que realiza a validação tiver propriedades que usam Sprint para inicializar, como por exemplo **@Autowired**, deve realizar da forma do `validador1`.
+
+As classes de validação devem implementar **Validator** do *org.springframework.validation.Validator*.
 
 ## Anotação Bean Validation
 
@@ -147,7 +160,7 @@ Assert.state(list.size() <=1, "Foi encontrado mais de um registro");
 ```
 No exemplo acima, é considerado um erro, que executa uma exceção, se na lista for tiver mais de um registro.
 
-# Diferença entre @NotNull, @NotEmpty e @NotBlanck
+## Diferença entre @NotNull, @NotEmpty e @NotBlanck
 
 Anotação | Se for nulo | Se estiver vazio | Se estiver vazio depois de aparado
 -------- | ------------|------------------|-----------------------------------
@@ -160,3 +173,49 @@ Nulo: Quando o objeto = null.
 Vazio: Quando tamanho/comprimento do objeto = 0, i.e.: String "", Array [], Map {}, Char ''.
 
 Aparado: Rempove espaços da String, i.e.: de "   " fica "".
+
+## BigDecimal
+
+É mais preciso que o **double**, portanto mais recomendado para trabalhar com valores monetários.
+
+A desvantagem é no uso para operações.
+
+## .stream()
+
+Converte a **List** para uma interface do tipo **Stream** e dela podemos realizar operações **Filter**, **Map**, **Reduce**.
+
+Esta interface permite chamar um método depois do outro, ou seja, de forma encadeara.
+
+No exemplo abaixo, filtra dados de uma lista, mapea os dados do objeto para números inteiros e por fim realiza a somatória destes valores mapeados:
+
+```java
+lista.stream().filter(...).mapToInt(...).sum()
+```
+
+## Lambda e método por referência
+
+Para o exemplo, um código que pela uma lista de objeto Livro e converte para uma lista de objetos Livro2. Sendo que Livro2 tem um construtor que recebe o objeto Livro como parâmetro.
+
+-> Código 1 - Utlizando laço *for*
+```java
+for(Livro l : listaLivro) {
+  lista2Livro[] = new Livro2(l);
+  });
+}
+```
+
+-> Código 2 - Utilizando Lambda
+```java
+lista2Livro = listaLivro.stream().map(l -> {
+    return new Livro2(l);
+});
+```
+
+-> Cósigo 3 - Utilizando método por referência
+```java
+lista2Livro = listaLivro.stream().map(Livro2::new);
+```
+
+Lambda é ima função anônima.
+
+Uma referência pode substitur uma expressão lambda, os arqumentos são obtidos por inferência.
