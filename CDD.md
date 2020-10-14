@@ -43,7 +43,7 @@ public class CompraRequest {
         //1 - Classe Pais criada no sistema
         Pais pais = manager.find(Pais.class, this.idPais);
         //1 - Classe Estado criada no sistema
-        //2 - Operador ternário - ramificação
+        //2 - Operador ternário - ramificação (conta 1 para o operador '?' e mais 1 para o operador ':')
         Estado estado = this.idEstado == null ? null : manager.find(Estado.class, this.idEstado);
 
         //1 - Classe ItemCompra criada no sistema
@@ -72,3 +72,54 @@ A recomendação de limites de PCI para as classes são:
 
 
 A classe *CompraRequest* pode ser considerada uma classe com atributos de dados e portanto limite de 10 PCI, a classe está portanto acima do limite.
+
+Abaixo, removemos o operador ternário de forma a diminuir os PCI e ficar com a contagem dentro do limite de 9:
+
+```java
+public class CompraRequest {
+
+    //Dados do comprador
+    @Email
+    private String email;
+    private String nome;
+    @CpfCnpj //1 - Anotação criada no sistema
+    private String documento;
+    private String endereco;
+    private String cidade;
+    @ExistId(dominioClasse = Pais.class, nomeCampo = "id") //1 - Anotação criada no sistema
+    private Long idPais;
+    @ExistId(dominioClasse = Estado.class, nomeCampo = "id") //Anotação criada no sistema, mas já foi contabilizada
+    private Long idEstado;
+
+    //Dados da compra
+    @Valid
+    private PedidoCompraRequest pedido; //1 - Classe PedidoCompraRequest criada no sistema
+    
+    //1 - Classe Compra criada no sistema
+    public Compra toModel(EntityManager manager){
+
+        //1 - Classe Pais criada no sistema
+        Pais pais = manager.find(Pais.class, this.idPais);
+        //1 - Classe Estado criada no sistema
+        Estado estado = null;
+        //1 - Ramificação
+        if ( this.idEstado != null ) {
+            estado = manager.find(Estado.class, this.idEstado);
+        }
+
+        //1 - Classe ItemCompra criada no sistema
+        List<ItemCompra> itens = this.pedido.getItens()
+                .stream()
+                .map(itemRequest -> itemRequest.toModel(manager))  //1 - Função como parâmetro 
+                .collect(Collectors.toList());
+
+        //Classe Compra já foi contabilizado
+        Compra compra = new Compra(this.email, this.nome, this.sobrenome, this.documento,
+                this.endereco, this.complemento, this.cidade, pais, estado,
+                this.telefone, this.cep, itens, this.pedido.getTotal());
+        compra.setCupom(this.pedido.getCodigoCupom(), manager);
+
+        return compra;
+    }
+}
+```
