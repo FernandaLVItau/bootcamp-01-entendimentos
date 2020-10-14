@@ -43,7 +43,7 @@ public class CompraRequest {
         //1 - Classe Pais criada no sistema
         Pais pais = manager.find(Pais.class, this.idPais);
         //1 - Classe Estado criada no sistema
-        //1 - Operador ternário - ramificação
+        //2 - Operador ternário - ramificação
         Estado estado = this.idEstado == null ? null : manager.find(Estado.class, this.idEstado);
 
         //1 - Classe ItemCompra criada no sistema
@@ -71,4 +71,4 @@ A recomendação de limites de PCI para as classes são:
 - Para classes com atributos de dados, geralmente são as Entities, value objects e classes de entrada e saída de dados, 9 PCI.
 
 
-A classe *CompraRequest* pode ser considerada uma classe com atributos de dados e portanto limite de 9 PCI, a classe está portanto dentro do limite.
+A classe *CompraRequest* pode ser considerada uma classe com atributos de dados e portanto limite de 10 PCI, a classe está portanto acima do limite.
