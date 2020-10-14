@@ -71,7 +71,7 @@ A recomendação de limites de PCI para as classes são:
 - Para classes com atributos de dados, geralmente são as Entities, value objects e classes de entrada e saída de dados, 9 PCI.
 
 
-A classe *CompraRequest* pode ser considerada uma classe com atributos de dados e portanto limite de 9 PCI, a classe está portanto acima do limite.
+A classe *CompraRequest* pode ser considerada uma classe com atributos de dados e portanto limite de 9 PCI, sendo assim esta classe está acima do limite.
 
 Abaixo, removemos o operador ternário de forma a diminuir os PCI e ficar com a contagem dentro do limite de 9:
 
