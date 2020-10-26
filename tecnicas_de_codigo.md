@@ -1,23 +1,30 @@
 # Anotações de códigos - JAVA
 
+
 ## Índice
 1. [EntityManager](#entitymanager)
 1. [@Transactional](#transactional)
 1. [@PersistenceContext](#persistencecontext)
+1. [Serialização e desserialização](#serialização-e-desserialização)
+1. [DTO](#dto)
 1. [@Controller](#controller)
 1. [@ResponseBody](#responsebody)
 1. [@RestController](#restcontroller)
-1. [Serialização e desserialização](#serialização-e-desserialização)
 1. [@Autowired](#autowired)
 1. [@InitBinder](#initbinder)
 1. [WebDataBinder](#webdatabinder)
 1. [Adicionar validação no InitBinder](#adicionar-validação-no-initbinder)
 1. [Anotação Bean Validation](#anotação-bean-validation)
 1. [Assert](#assert)
+1. [@ExptionHandler](#exptionhandler)
+1. [@ControllerAdvice](#controlleradvice)
+1. [@RestControllerAdvice](#restcontrolleradvice)
 1. [Diferença entre @NotNull, @NotEmpty e @NotBlanck](#diferença-entre-notnull-notempty-e-notblanck)
 1. [BigDecimal](#bigdecimal)
 1. [.stream()](#stream)
 1. [Lambda e método por referência](#lambda-e-método-por-referência)
+1. [Diferença entre Set, List e Map](#diferença-entre-set-list-e-map)
+1. [@GeneratedValue](#generatedvalue)
 
 
 ## EntityManager
@@ -114,7 +121,7 @@ public void init(WebDataBinder binder) {
 }
 ```
 
-Ambas as formas podem ser passadas como parâmetro para `addValidators`. Se a classe que realiza a validação tiver propriedades que usam Sprint para inicializar, como por exemplo **@Autowired**, deve realizar da forma do `validador1`.
+Ambas as formas podem ser passadas como parâmetro para `addValidators`. Se a classe que realiza a validação tiver propriedades que usam Sprint para inicializar, como por exemplo **[@Autowired](#autowired)**, deve realizar da forma do `validador1`.
 
 As classes de validação devem implementar **Validator** do *org.springframework.validation.Validator*.
 
@@ -209,6 +216,7 @@ Tipo específico de componente para classes com métodos **[@ExptionHandler](#ex
 ## @RestControllerAdvice
 
 Os tipos com esta anotação são tratados como advice do controlador, onde métodos **[@ExptionHandler](#exptionhandler)** assumem a semântica **[@ResponseBody](#responsebody)**.
+
 Esta anotação é um 'atalho' do uso das anotações:
 
 - **[@ControllerAdvice](#controlleradvice)**;
@@ -251,7 +259,7 @@ A desvantagem é no uso para operações.
 
 ## .stream()
 
-Converte **List** para uma interface do tipo **Stream** e dela podemos realizar operações **Filter**, **Map** e **Reduce**.
+Converte uma coleção para uma interface do tipo **Stream** e dela podemos realizar operações **Filter**, **Map** e **Reduce**.
 
 Esta interface permite chamar um método depois do outro, ou seja, de forma encadeara.
 
