@@ -6,7 +6,7 @@
 1. [@Transactional](#transactional)
 1. [@PersistenceContext](#persistencecontext)
 1. [@RestController](#restcontroller)
-1. [Serialização e desserialização](#serializacaoedesserializacao)
+1. [Serialização e desserialização](#serialização-e-desserialização)
 1. [@Autowired](#autowired)
 1. [@InitBinder](#initbinder)
 1. [WebDataBinder](#webdatabinder)
@@ -60,8 +60,6 @@ Esta anotação é um 'atalho' do uso das anotações:
 
 - **@Controller**: Indica um tipo específico de compomente, o qual permite que a classe seja detectada automaticamente;
 - **@ResponseBody**: Indica que o(s) método(s) retorna(m) um valor associado ao corpo de uma resposta da web.
-
-<div id="serializacaoedesserializacao"/>
 
 ## Serialização e desserialização
 
