@@ -4,6 +4,8 @@
 1. [EntityManager](#entitymanager)
 1. [@Transactional](#transactional)
 1. [@PersistenceContext](#persistencecontext)
+1. [@Controller](#controller)
+1. [@ResponseBody](#responsebody)
 1. [@RestController](#restcontroller)
 1. [Serialização e desserialização](#serialização-e-desserialização)
 1. [@Autowired](#autowired)
@@ -42,19 +44,9 @@ Anotação para realiza transação.
 
 ## @PersistenceContext
 
-Uma instancia **EntityManager** está associado a um contexto de persistencia
+Uma instancia **[EntityManager](#entitymanager)** está associado a um contexto de persistencia
 
-Lida com um conjunto de entidades que contêm dados a serem persistidos em, por exemplo, um banco de dados. O Contexto está ciente dos diferentes estados que uma entidade pode ter em relação ao contexto e armazernamento (ex. BD).
-
-
-## @RestController
-
-Marca  que a classe é um controlador (controller) o qual cada método retorna um objeto de domínio em vez de uma visualização (view).
-
-Esta anotação é um 'atalho' do uso das anotações:
-
-- **@Controller**: Indica um tipo específico de compomente, o qual permite que a classe seja detectada automaticamente;
-- **@ResponseBody**: Indica que o(s) método(s) retorna(m) um valor associado ao corpo de uma resposta da web.
+Lida com um conjunto de entidades que contêm dados a serem persistidos em, por exemplo, um banco de dados. O Contexto está ciente dos diferentes estados que uma entidade pode ter em relação ao contexto e armazernamento (ex. Banco de Dados).
 
 
 ## Serialização e desserialização
@@ -64,6 +56,33 @@ Serialização: Converter de outro formato, ex. texto JSON, para objeto;
 Desserialização: Converter de objeto para outro formato necessário, ex. texto JSON;
 
 O Spring precisa que as entidades contenham os setters e getters e/ou construtores para realizar as conversões automaticamente, por exemplo, para o controller retornar um objeto, que é uma entidade, e exibir na api o objeto em formato JSON, a entidade precisa ter os métodos getters.
+
+
+## DTO
+
+*Data Transfer Object* - Objeto de transferência de dados.
+
+A ideia base do DTO é agrupar um conjunto de atributos numa classe simples otimizando a comunicação.
+
+
+## @Controller
+
+Indica um tipo específico de compomente, o qual permite que a classe seja detectada automaticamente.
+
+
+## @ResponseBody
+
+Indica que o(s) método(s) retorna(m) um valor associado ao corpo de uma resposta da web.
+
+
+## @RestController
+
+Marca que a classe é um controlador (*controller*) o qual cada método retorna um objeto de domínio em vez de uma visualização (*view*).
+
+Esta anotação é um 'atalho' do uso das anotações:
+
+- **[@Controller](#controller)**;
+- **[@ResponseBody](#responsebody)**.
 
 
 ## @Autowired
@@ -177,6 +196,24 @@ Exemplo de uso da anotação criada acima:
 private Long idPais;
 ```
 
+## @ExptionHandler
+
+Anotação para lidar com exeções em classes e/ou métodos manipuladores (*handlers*) específicos.
+
+
+## @ControllerAdvice
+
+Tipo específico de componente para classes com métodos **[@ExptionHandler](#exptionhandler)**, **[@InitBinder](#initbinder)** ou **@ModelAttibute** a serem comartilhados entre vários controladores (*controllers*)
+
+
+## @RestControllerAdvice
+
+Os tipos com esta anotação são tratados como advice do controlador, onde métodos **[@ExptionHandler](#exptionhandler)** assumem a semântica **[@ResponseBody](#responsebody)**.
+Esta anotação é um 'atalho' do uso das anotações:
+
+- **[@ControllerAdvice](#controlleradvice)**;
+- **[@ResponseBody](#responsebody)**.
+
 
 ## Assert
 Utilizado normalmente em testes, mas pode ser utilizado para validar status ao invés de utilizar *if*.
@@ -249,3 +286,24 @@ lista2Livro = listaLivro.stream().map(Livro2::new);
 Lambda é uma função anônima.
 
 Uma expressão lambda pode ser substituda por uma referência, o argumento é obtido por inferência.
+
+
+## Diferença entre Set, List e Map
+
+Todas são interfaces do pacote de coleções (*collections*)
+
+- **Set**: Não armazena a posição em que estão os elementos, ou seja, ela entende que as classes que as implementam so como conjuntos matemáticos cuja posição não é relevante. Não permite objetos iguais no conjunto.
+- **List**: Armazena a posição dos elementos, possibilitando buscar pelo índice do elemento. Permite objetos iguais na lista.
+- **Map**: Armazena pares de chave-valor. Não pode haver chaves iguais.
+
+
+## @GeneratedValue
+
+Esta anotação é utilizada após **@Id** (mostra que o atributo é um identificador único) para indicar que será responsabilidade do provedor de persistência gerenciar o identificador único (chave). Sem esta anotação, o gerenciamento dica na responsabilidade da aplicação.
+
+É possível definir a estratégia de geração da chave pelo atributo *strategy*, as opçes são:
+
+- **GenerationType.AUTO**: Padrão. O provedor de persistência escolhe a estratégia mais adequada conforme o Banco de Dados;
+- **GenerationType.IDENTITY**: Informa ao provedor de persistência que as chaves serão geradas pelo autoincremento do Banco de Dados. Alguns Banco de Dados podem no suportar essa opção;
+- **GenerationType.SEQUENCE**: Informa ao provedor de persistência que as chaves serão geradas a partir de uma sequencia. A sequencia pode ser especificada pelo atributo *generator*, caso não seja, é usada uma padrão, global, para todas as entidades. Alguns Banco de Dados podem no suportar essa opção;
+- **GenerationType.TABLE**: Informa ao provedor de persistência que as chaves serão geradas a partir de uma tabela, que será criada para gerenciar as chaves. Isso gera uma sobrecarga de consultas para manter a tabela atualizada e, por isso, é a opção menos recomendada.
