@@ -1,8 +1,7 @@
 # Anotações de códigos - JAVA
 
 ## Índice
-1. [Lambda e método por referência](#lambdaereferencia)
-1. [EntityManager](#entitynanager)
+1. [EntityManager](#entitymanager)
 1. [@Transactional](#transactional)
 1. [@PersistenceContext](#persistencecontext)
 1. [@RestController](#restcontroller)
@@ -10,15 +9,14 @@
 1. [@Autowired](#autowired)
 1. [@InitBinder](#initbinder)
 1. [WebDataBinder](#webdatabinder)
-1. [Adicionar validação no InitBinder](#addvalidacaoinitbinder)
-1. [Anotação Bean Validation](#beanvalidation)
+1. [Adicionar validação no InitBinder](#adicionar-validação-no-initbinder)
+1. [Anotação Bean Validation](#anotação-bean-validation)
 1. [Assert](#assert)
-1. [Diferença entre @NotNull, @NotEmpty e @NotBlanck](#diffnotnullnotemptynotblanck)
+1. [Diferença entre @NotNull, @NotEmpty e @NotBlanck](#diferença-entre-notnull-notempty-e-notblanck)
 1. [BigDecimal](#bigdecimal)
 1. [.stream()](#stream)
+1. [Lambda e método por referência](#lambda-e-método-por-referência)
 
-
-<div id='entitynanager'/>
 
 ## EntityManager
 
@@ -32,7 +30,6 @@ A classe é capaz de:
 - Atualizar entidades;
 - Remover entidades.
 
-<div id="transactional"/>
 
 ## @Transactional
 
@@ -42,7 +39,6 @@ Anotação para realiza transação.
 
 *Quando usa EntityManage precisa utilizar esta anotação, mas se usar Repository, o repository já tem os tratamentos de transação e não precisa da anotação.*
 
-<div id="persistencecontext"/>
 
 ## @PersistenceContext
 
@@ -50,7 +46,6 @@ Uma instancia **EntityManager** está associado a um contexto de persistencia
 
 Lida com um conjunto de entidades que contêm dados a serem persistidos em, por exemplo, um banco de dados. O Contexto está ciente dos diferentes estados que uma entidade pode ter em relação ao contexto e armazernamento (ex. BD).
 
-<div id="restcontroller"/>
 
 ## @RestController
 
@@ -61,6 +56,7 @@ Esta anotação é um 'atalho' do uso das anotações:
 - **@Controller**: Indica um tipo específico de compomente, o qual permite que a classe seja detectada automaticamente;
 - **@ResponseBody**: Indica que o(s) método(s) retorna(m) um valor associado ao corpo de uma resposta da web.
 
+
 ## Serialização e desserialização
 
 Serialização: Converter de outro formato, ex. texto JSON, para objeto;
@@ -69,19 +65,16 @@ Desserialização: Converter de objeto para outro formato necessário, ex. texto
 
 O Spring precisa que as entidades contenham os setters e getters e/ou construtores para realizar as conversões automaticamente, por exemplo, para o controller retornar um objeto, que é uma entidade, e exibir na api o objeto em formato JSON, a entidade precisa ter os métodos getters.
 
-<div id="autowired"/>
 
 ## @Autowired
 
 Marca um construtor, campo, método setter ou método de configuração para ser autocarregado pelos recursos de injeção de dependência do Spring.
 
-<div id="initbinder"/>
 
 ## @InitBinder
 
 Funciona como um pré-processador para cada requisição feita para o controller.
 
-<div id="webdatabinder"/>
 
 ## WebDataBinder
 
@@ -89,7 +82,6 @@ Um tipo específico para requisição web de DataBinder, que permite definir pro
 
 Por exemplo, adicinar para realizar algumas validações antes de processar a requisição.
 
-<div id="addvalidacaoinitbinder"/>
 
 ## Adicionar validação no InitBinder
 
@@ -107,7 +99,6 @@ Ambas as formas podem ser passadas como parâmetro para `addValidators`. Se a cl
 
 As classes de validação devem implementar **Validator** do *org.springframework.validation.Validator*.
 
-<div id="beanvalidation"/>
 
 ## Anotação Bean Validation
 
@@ -186,7 +177,6 @@ Exemplo de uso da anotação criada acima:
 private Long idPais;
 ```
 
-<div id="assert"/>
 
 ## Assert
 Utilizado normalmente em testes, mas pode ser utilizado para validar status ao invés de utilizar *if*.
@@ -199,7 +189,6 @@ Assert.state(list.size() <=1, "Foi encontrado mais de um registro");
 ```
 No exemplo acima, é considerado um erro que executa uma exceção, se na lista tiver mais de um registro.
 
-<div id="diffnotnullnotemptynotblanck"/>
 
 ## Diferença entre @NotNull, @NotEmpty e @NotBlanck
 
@@ -215,7 +204,6 @@ Vazio: Quando tamanho/comprimento do objeto = 0, i.e.: String "", Array [], Map 
 
 Aparado: Rempove espaços da String, i.e.: de " teste " fica "teste".
 
-<div id="bigdecimal"/>
 
 ## BigDecimal
 
@@ -223,7 +211,6 @@ As casas decimais são mais precisos que o **double**, portanto mais recomendado
 
 A desvantagem é no uso para operações.
 
-<div id="stream"/>
 
 ## .stream()
 
@@ -236,7 +223,7 @@ No exemplo abaixo, filtra dados de uma lista, mapea os dados do objeto para núm
 ```java
 lista.stream().filter(...).mapToInt(...).sum()
 ```
-<div id='lambdaereferencia'/>
+
 
 ## Lambda e método por referência
 
