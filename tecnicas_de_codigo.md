@@ -1,5 +1,8 @@
 # Anotações de códigos - JAVA
 
+## Indice
+1. [Lambda e método por referência](#lambdaereferencia)
+
 ## EntityManager
 
 Classe responsável por gerenciar o ciclo de vida das entidades.
@@ -192,7 +195,7 @@ No exemplo abaixo, filtra dados de uma lista, mapea os dados do objeto para núm
 ```java
 lista.stream().filter(...).mapToInt(...).sum()
 ```
-
+<div id='lambdaereferencia'/>
 ## Lambda e método por referência
 
 Considere o exemplo em que há uma lista de objeto `Livro1` que será convertida para uma lista de objetos `Livro2`. A classe `Livro2` tem um construtor que recebe um objeto `Livro1` como parâmetro.
@@ -216,4 +219,4 @@ lista2Livro = listaLivro.stream().map(Livro2::new);
 
 Lambda é uma função anônima.
 
-Uma expressão lambda pode substitur uma referência, o arqumento é obtido por inferência.
+Uma expressão lambda pode ser substituda por uma referência, o argumento é obtido por inferência.
