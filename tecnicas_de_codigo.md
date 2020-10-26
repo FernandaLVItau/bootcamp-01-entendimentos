@@ -196,6 +196,7 @@ No exemplo abaixo, filtra dados de uma lista, mapea os dados do objeto para núm
 lista.stream().filter(...).mapToInt(...).sum()
 ```
 <div id='lambdaereferencia'/>
+
 ## Lambda e método por referência
 
 Considere o exemplo em que há uma lista de objeto `Livro1` que será convertida para uma lista de objetos `Livro2`. A classe `Livro2` tem um construtor que recebe um objeto `Livro1` como parâmetro.
