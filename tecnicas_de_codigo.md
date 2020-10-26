@@ -247,12 +247,12 @@ Nulo: Quando o objeto = null.
 
 Vazio: Quando tamanho/comprimento do objeto = 0, i.e.: String "", Array [], Map {}, Char ''.
 
-Aparado: Rempove espaços da String, i.e.: de " teste " fica "teste".
+Aparado: Remove espaços da String, i.e.: de " teste " fica "teste".
 
 
 ## BigDecimal
 
-As casas decimais são mais precisos que o **double**, portanto mais recomendado para trabalhar com valores monetários.
+As casas decimais são mais precisas que o **double**, portanto mais recomendado para trabalhar com valores monetários.
 
 A desvantagem é no uso para operações.
 
@@ -272,7 +272,7 @@ lista.stream().filter(...).mapToInt(...).sum()
 
 ## Lambda e método por referência
 
-Considere o exemplo em que há uma lista de objeto `Livro1` que será convertida para uma lista de objetos `Livro2`. A classe `Livro2` tem um construtor que recebe um objeto `Livro1` como parâmetro.
+Considere o exemplo em que há uma lista de objetos `Livro1` que será convertida para uma lista de objetos `Livro2`. A classe `Livro2` tem um construtor que recebe um objeto `Livro1` como parâmetro.
 
 -> Código 1 - Utlizando laço *for*
 ```java
@@ -286,7 +286,7 @@ for(Livro l : listaLivro) {
 lista2Livro = listaLivro.stream().map(l -> { return new Livro2(l); });
 ```
 
--> Cósigo 3 - Utilizando método por referência
+-> Código 3 - Utilizando método por referência
 ```java
 lista2Livro = listaLivro.stream().map(Livro2::new);
 ```
@@ -298,10 +298,10 @@ Uma expressão lambda pode ser substituda por uma referência, o argumento é ob
 
 ## Diferença entre Set, List e Map
 
-Todas são interfaces do pacote de coleções (*collections*)
+Todas são interfaces do pacote de coleções (*collections*):
 
-- **Set**: Não armazena a posição em que estão os elementos, ou seja, ela entende que as classes que as implementam so como conjuntos matemáticos cuja posição não é relevante. Não permite objetos iguais no conjunto.
-- **List**: Armazena a posição dos elementos, possibilitando buscar pelo índice do elemento. Permite objetos iguais na lista.
+- **Set**: Não armazena a posição em que estão os elementos, ou seja, ela entende que as classes que as implementam so como conjuntos matemáticos cuja posição não é relevante. Não permite objetos iguais no conjunto;
+- **List**: Armazena a posição dos elementos, possibilitando buscar pelo índice do elemento. Permite objetos iguais na lista;
 - **Map**: Armazena pares de chave-valor. Não pode haver chaves iguais.
 
 
