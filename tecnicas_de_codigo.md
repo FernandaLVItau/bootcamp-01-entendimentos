@@ -25,6 +25,8 @@
 1. [Lambda e método por referência](#lambda-e-método-por-referência)
 1. [Diferença entre Set, List e Map](#diferença-entre-set-list-e-map)
 1. [@GeneratedValue](#generatedvalue)
+1. [@Enumerated](#enumerated)
+1. [JpaRepository](#jparepository)
 
 
 ## EntityManager
@@ -315,3 +317,22 @@ Esta anotação é utilizada após **@Id** (mostra que o atributo é um identifi
 - **GenerationType.IDENTITY**: Informa ao provedor de persistência que as chaves serão geradas pelo autoincremento do Banco de Dados. Alguns Banco de Dados podem no suportar essa opção;
 - **GenerationType.SEQUENCE**: Informa ao provedor de persistência que as chaves serão geradas a partir de uma sequencia. A sequencia pode ser especificada pelo atributo *generator*, caso não seja, é usada uma padrão, global, para todas as entidades. Alguns Banco de Dados podem no suportar essa opção;
 - **GenerationType.TABLE**: Informa ao provedor de persistência que as chaves serão geradas a partir de uma tabela, que será criada para gerenciar as chaves. Isso gera uma sobrecarga de consultas para manter a tabela atualizada e, por isso, é a opção menos recomendada.
+
+
+## @Enumerated
+
+ Indica que o campo é um *enum* e pode especificacar se deve persistir o valor inteiro do *enum* (*default*, não precisa passar argumento), ou a descrição utilizando **@Enumerated(EnumType.String)**
+
+
+## JpaRepository
+
+Interface de extenção específica JPA de Repository.
+
+Todas as superinterfaces:
+- CrudRepository<T, ID>;
+- PagingAndSortingRepository<T,ID>;
+- QueryByExampleExecutor<T>;
+- Repository<T,ID>.
+  
+**T**: Tipo do domínio do repositorio (a classe da entidade relacionada ao repositório).
+**ID**: Tipo do identificador, por exemplo, Long ou String.
