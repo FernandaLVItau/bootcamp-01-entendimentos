@@ -9,11 +9,11 @@ O princípio é que com menor carga coginitia, mais fácil é para outros desenv
 Para o cálculo de complexidade contamos:
 
 - 1 ponto para cada ramificação (if/else/case/switch);
-- 1 ponto para tratamento deexeções (try/catch/finally);
+- 1 ponto para tratamento de exeções (try/catch/finally);
 - 1 ponto para acoplamento com tipos criados dentro do sistema;
 - 1 ponto para funções passadas como argumentos.
 
-Códigos a tecnologias tranversais, como uso de frameworks e bibliotacas, não contam pontos. É considerado um conhecimento prévio que o desenvolvedor já deve possuir.
+Códigos a tecnologias transversais, como uso de frameworks e bibliotacas, não contam pontos. É considerado um conhecimento prévio que o desenvolvedor já deve possuir.
 
 Exemplo de contagem:
 
